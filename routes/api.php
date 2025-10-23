@@ -19,5 +19,6 @@ Route::controller(UserController::class)->group(function () {
 });
 Route::controller(IndexController::class)->group(function () {
     Route::get('/get-faile-news', 'getFaileNews');
-    Route::get('/get-like-news', 'getLikeNews');
+    Route::get('/get-faile-newsChild/{newsId}', 'getFaileNewsChild');
+    Route::post('/like-plus/{newsId}', 'likePlus');
 });
