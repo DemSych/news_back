@@ -26,7 +26,7 @@ class UserController extends Controller
         }
         else{
             throw ValidationException::withMessages([
-               "Ошибка авторизации"
+                "Ошибка авторизации"
             ]);
         }
         

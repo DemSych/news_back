@@ -21,4 +21,7 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/get-faile-news', 'getFaileNews');
     Route::get('/get-faile-newsChild/{newsId}', 'getFaileNewsChild');
     Route::post('/like-plus/{newsId}', 'likePlus');
+    Route::get('/faile-news-autor/{AuthorId}', 'faileNewsAutor');
+    Route::post('/post-loader-news', 'postLoaderNews');
+    Route::post('/post-loader-images', 'postLoaderImages');
 });
