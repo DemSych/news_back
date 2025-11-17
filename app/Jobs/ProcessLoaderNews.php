@@ -31,7 +31,6 @@ class ProcessLoaderNews implements ShouldQueue
      */
     public function handle(): void
     {
-        
         $currentDateTime = now();
         $model = new News;
         $model->title =$this->title;
@@ -43,6 +42,6 @@ class ProcessLoaderNews implements ShouldQueue
         $model->like = 0;
         $model->views = 0;
         $model->save();
-        
     }
+    
 }

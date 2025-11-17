@@ -16,6 +16,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/registration', 'registration');
     Route::post('/auth', 'auth');
     Route::post('/check-user', 'checkUser');
+    Route::post('/post-loader-avatar', 'postLoaderAvatar');
 });
 Route::controller(IndexController::class)->group(function () {
     Route::get('/get-faile-news', 'getFaileNews');
@@ -24,4 +25,8 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/faile-news-autor/{AuthorId}', 'faileNewsAutor');
     Route::post('/post-loader-news', 'postLoaderNews');
     Route::post('/post-loader-images', 'postLoaderImages');
+    Route::post('/post-delete-news/{newsIds}', 'postDeleteNews');
+    Route::get('/get-faile-news-like', 'getFaileNewsLike');
+    Route::post('/post-redact-news', 'postRedactNews');
+    Route::post('/get-views-plus/{newsId}', 'getViewsPlus');
 });

@@ -9,17 +9,18 @@ use Illuminate\Support\Facades\Validator;
         public static function validator(Request $request){
             //dd($request);
             return Validator::make($request->all(),[
-                'email' => 'required|min:2|max:10',
-
-                'password' => 'required|min:2|max:10',
+                'email' => 'required|min:2|max:20|email',
+                'password' => 'required|min:2|max:10|alpha_dash',
                 
             ],[
-                "email.required" => "Не заполнено обязательное поле",
-                "email.min" => "Минимальная длина 2 символа",
-                "email.max" => "Максимальная длина 10 символа",
-                "password.required" => "Не заполнено обязательное поле",
-                "password.min" => "Минимальная длина 2 символа",
-                "password.max" => "Максимальная длина 10 символов",
+                "email.required" => "Не заполнено обязательное поле Email. ",
+                "email.min" => "Минимальная длина поля Email 5 символов. ",
+                "email.max" => "Максимальная длина поля Email 20 символа. ",
+                "email.email"=> "Не верный формат электронной почты. ",
+                "password.required" => "Не заполнено обязательное поле Password. ",
+                "password.min" => "Минимальная длина поля Password 2 символа. ",
+                "password.max" => "Максимальная длина поля Password 20 символов. ",
+                "password.alpha_dash" => "Пароль должен содержать только латинские буквы, цифры, знаки подчёркивания (_) и дефисы (-). ",
             ]);
 
             

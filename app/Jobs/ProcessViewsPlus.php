@@ -25,5 +25,6 @@ class ProcessViewsPlus implements ShouldQueue
          $model= News::where('id',$this->idNews)->first();   
         $model->views++;
         $model->save();
+        return;
     }
 }
