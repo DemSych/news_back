@@ -41,6 +41,7 @@ class ProcessLoaderNews implements ShouldQueue
         $model->date = $currentDateTime->format('Y-m-d');
         $model->like = 0;
         $model->views = 0;
+        $model->status = "active";
         $model->save();
     }
     

@@ -13,18 +13,16 @@ class ProcessLoaderUser implements ShouldQueue
     public $name;
     public $email;
     public $password;
-    public $editor;
     public $file_avatar;
     
     /**
      * Create a new job instance.
      */
-    public function __construct($name, $email, $password, $editor, $file_avatar)
+    public function __construct($name, $email, $password, $file_avatar)
     {
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        $this->editor = $editor;
         $this->file_avatar = $file_avatar;
        
     }
@@ -38,8 +36,9 @@ class ProcessLoaderUser implements ShouldQueue
        $model->name =$this->name;
         $model->email =$this->email;
         $model->password = Hash::make($this->password);
-        $model->author = $this->editor;
+        $model->author = "user";
         $model->avatar = $this->file_avatar;
+        $model->admin = "user";
         $model->save();
     }
 }
