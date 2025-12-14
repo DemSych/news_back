@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\ProcessLoaderUser;
-use App\Mail\NewsMail;
-use App\Mail\OrderShipped;
 use App\Models\User;
 use App\Validators\AuthValidator;
 use App\Validators\ImgValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
@@ -44,6 +40,9 @@ class UserController extends Controller
         return null;
     }
     public function registration(Request $request){
+        if($request->name_user == null){
+            return "Не заполнено обязательное поле Name ";
+        }
         if($request->password!=$request->second_password){
             return "Пароли не совпадают";
         }
@@ -51,10 +50,23 @@ class UserController extends Controller
         if($validator->fails()){
             return [$validator->errors()->all()];
         }
-        ProcessLoaderUser::dispatch($request->name_user, $request->email,$request->password,$request->name_img);
-       // return ["token" => $request->createToken("front")->plainTextToken];
-       return true;
-        
+        else{
+            $model = new User();
+            $model->name =$request->name_user;
+            $model->email =$request->email;
+            $model->password = Hash::make($request->password);
+            $model->author = "user";
+            $model->avatar = $request->name_img;
+            $model->admin = "user";
+            $model->save();
+            if ( $model->save()) {
+                 $user = User::where('email', $request->email)->first();
+                return ["token" => $user->createToken("front")->plainTextToken];
+            }
+            else{
+                return 'Ошибка загрузки, попробуйте еще раз';
+            }
+        }
     }
     public function checkUser(Request $request){
         if(isset($request->token)){
@@ -67,10 +79,10 @@ class UserController extends Controller
         }
        
     }
-    public function postFaileUsers(Request $request){
-        $data =[];
-        $data = User::select('id','name', 'email', 'admin', 'avatar')->get();
-        return $data;
+    public function postFaileUsers(){
+        $users =[];
+        $users = User::select('name', 'email', 'admin', 'avatar')->get();
+        return $users;
     }
     public function postFaileBlockedUser($userId) {
         $data = [];

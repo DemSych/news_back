@@ -7,12 +7,10 @@ use App\Jobs\ProcessLikePlus;
 use App\Jobs\ProcessLoaderNews;
 use App\Jobs\ProcessRedact;
 use App\Jobs\ProcessViewsPlus;
-use App\Mail\NewsMail;
 use App\Models\News;
 use App\Models\User;
 use App\Validators\ImgValidator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 
